@@ -85,10 +85,8 @@ std::string mem_string( const MemoryStatus & mem_status,
     break;
     }
   default: // Default mode, just show the used/total memory in MB
-    const float used_mem_in_gigabytes = convert_unit(mem_status.used_mem, GIGABYTES, MEGABYTES);
-    const float total_mem_in_gigabytes = convert_unit(mem_status.total_mem, GIGABYTES, MEGABYTES);
-    //oss.precision(1);
-    oss << used_mem_in_gigabytes << '/' << total_mem_in_gigabytes << "G";
+    oss << convert_unit(mem_status.used_mem, GIGABYTES, MEGABYTES) << '/' 
+        << convert_unit(mem_status.total_mem, GIGABYTES, MEGABYTES) << 'G';
   }
 
   if( use_colors )

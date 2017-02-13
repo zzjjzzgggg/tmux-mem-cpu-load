@@ -88,7 +88,7 @@ std::string cpu_string( CPU_MODE cpu_mode, unsigned int cpu_usage_delay, unsigne
   oss.width( 5 );
   oss << percentage * multiplier;
   oss << "%";
-  oss << " X" << (int)get_cpu_count();
+  oss << " x" << (int)get_cpu_count();
   if( use_colors )
   {
     if( use_powerline_left )
