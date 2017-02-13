@@ -31,7 +31,7 @@ std::string mem_string( const MemoryStatus & mem_status,
 {
   std::ostringstream oss;
   // Change the percision for floats, for a pretty output
-  oss.precision(2);
+  oss.precision(1);
   oss.setf( std::ios::fixed | std::ios::right );
 
   unsigned int color = static_cast< unsigned int >((100 * mem_status.used_mem) / mem_status.total_mem);
@@ -87,7 +87,7 @@ std::string mem_string( const MemoryStatus & mem_status,
   default: // Default mode, just show the used/total memory in MB
     const float used_mem_in_gigabytes = convert_unit(mem_status.used_mem, GIGABYTES, MEGABYTES);
     const float total_mem_in_gigabytes = convert_unit(mem_status.total_mem, GIGABYTES, MEGABYTES);
-    oss.precision(2);
+    //oss.precision(1);
     oss << used_mem_in_gigabytes << '/' << total_mem_in_gigabytes << "G";
   }
 
