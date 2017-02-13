@@ -20,6 +20,7 @@ version.h
 config.h
 CTestTestfile.cmake
 DartConfiguration.tcl
+build/
 
 # Packages #
 ############

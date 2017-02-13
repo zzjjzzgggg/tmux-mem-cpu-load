@@ -39,6 +39,8 @@ std::string load_string( bool use_colors,
   short num_averages )
 {
   std::ostringstream ss;
+  ss.precision(2);
+  ss.setf( std::ios::fixed | std::ios::right );
   double averages[num_averages];
   // based on: opensource.apple.com/source/Libc/Libc-262/gen/getloadavg.c
 
@@ -78,18 +80,16 @@ std::string load_string( bool use_colors,
     }
 
     ss << ' ';
-    for( int i = 0; i < num_averages; ++i )
-    {
+    for( int i = 0; i < num_averages; ++i ) {
       // Round to nearest, make sure this is only a 0.00 value not a 0.0000
-      float avg = floorf( static_cast<float>( averages[i] ) * 100 + 0.5 ) / 100;
+      float avg = floorf(static_cast<float>(averages[i]) * 100 + 0.5) / 100;
       // Don't print trailing whitespace for last element
-      if ( i == num_averages-1 )
-      {
-        ss << avg;
+      if ( i == num_averages-1 ) {
+        ss  << avg;
       }
       else
       {
-        ss << avg << " ";
+        ss  << avg << " ";
       }
     }
 
