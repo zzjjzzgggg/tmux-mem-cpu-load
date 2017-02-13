@@ -56,6 +56,7 @@ std::string mem_string( const MemoryStatus & mem_status,
     }
   }
 
+      oss << ' ';
   switch( mode )
   {
   case MEMORY_MODE_FREE_MEMORY: // Show free memory in MB or GB
@@ -64,13 +65,13 @@ std::string mem_string( const MemoryStatus & mem_status,
     const float free_mem_in_gigabytes = convert_unit( free_mem, GIGABYTES, MEGABYTES );
 
     // if free memory is less than 1 GB, use MB instead
-    if(  free_mem_in_gigabytes < 1.0f )
+    if(free_mem_in_gigabytes < 1.0f )
     {
-      oss << free_mem << "MB";
+      oss << free_mem << "M";
     }
     else
     {
-      oss << free_mem_in_gigabytes << "GB";
+      oss << free_mem_in_gigabytes << "G";
     }
     break;
     }
@@ -87,8 +88,7 @@ std::string mem_string( const MemoryStatus & mem_status,
     const float used_mem_in_gigabytes = convert_unit(mem_status.used_mem, GIGABYTES, MEGABYTES);
     const float total_mem_in_gigabytes = convert_unit(mem_status.total_mem, GIGABYTES, MEGABYTES);
     oss.precision(2);
-    oss << used_mem_in_gigabytes << '/'
-      << total_mem_in_gigabytes << "GB";
+    oss << used_mem_in_gigabytes << '/' << total_mem_in_gigabytes << "G";
   }
 
   if( use_colors )
