@@ -137,7 +137,7 @@ int main( int argc, char** argv )
 {
   unsigned cpu_usage_delay = 990000;
   short averages_count = 3;
-  short graph_lines = 10; // max 32767 should be enough
+  short graph_lines = get_cpu_count();
   bool use_colors = false;
   bool use_powerline_left = false;
   bool use_powerline_right = false;
