@@ -82,13 +82,16 @@ std::string cpu_string( CPU_MODE cpu_mode, unsigned int cpu_usage_delay, unsigne
 
   if( graph_lines > 0)
   {
-    oss << " ";
-    oss << get_graph_by_percentage(unsigned(percentage), graph_lines);
+    oss << " [";
+    oss << get_graph_by_percentage( unsigned( percentage ), graph_lines );
+    oss << "]";
   }
   oss.width( 5 );
   oss << percentage * multiplier;
   oss << "%";
+
   oss << " x" << (int)get_cpu_count();
+
   if( use_colors )
   {
     if( use_powerline_left )
@@ -137,7 +140,7 @@ int main( int argc, char** argv )
 {
   unsigned cpu_usage_delay = 990000;
   short averages_count = 3;
-  short graph_lines = get_cpu_count();
+  short graph_lines = 10; // max 32767 should be enough
   bool use_colors = false;
   bool use_powerline_left = false;
   bool use_powerline_right = false;
@@ -243,11 +246,11 @@ int main( int argc, char** argv )
 
   MemoryStatus memory_status;
   mem_status( memory_status );
-  std::cout << cpu_string(cpu_mode, cpu_usage_delay, graph_lines, use_colors, use_powerline_left, use_powerline_right)
-    << load_string(use_colors, use_powerline_left, use_powerline_right, averages_count)
-    << mem_string(memory_status, mem_mode, use_colors, use_powerline_left,
-    use_powerline_right);
+  std::cout << mem_string( memory_status, mem_mode, use_colors, use_powerline_left, use_powerline_right )
+    << cpu_string( cpu_mode, cpu_usage_delay, graph_lines, use_colors, use_powerline_left, use_powerline_right )
+    << load_string( use_colors, use_powerline_left, use_powerline_right, averages_count );
+
+  std::cout << std::endl;
 
   return EXIT_SUCCESS;
 }
-

@@ -31,7 +31,7 @@ std::string mem_string( const MemoryStatus & mem_status,
 {
   std::ostringstream oss;
   // Change the percision for floats, for a pretty output
-  oss.precision(1);
+  oss.precision( 2 );
   oss.setf( std::ios::fixed | std::ios::right );
 
   unsigned int color = static_cast< unsigned int >((100 * mem_status.used_mem) / mem_status.total_mem);
@@ -56,7 +56,6 @@ std::string mem_string( const MemoryStatus & mem_status,
     }
   }
 
-      oss << ' ';
   switch( mode )
   {
   case MEMORY_MODE_FREE_MEMORY: // Show free memory in MB or GB
@@ -65,13 +64,13 @@ std::string mem_string( const MemoryStatus & mem_status,
     const float free_mem_in_gigabytes = convert_unit( free_mem, GIGABYTES, MEGABYTES );
 
     // if free memory is less than 1 GB, use MB instead
-    if(free_mem_in_gigabytes < 1.0f )
+    if(  free_mem_in_gigabytes < 1.0f )
     {
-      oss << free_mem << "M";
+      oss << free_mem << "MB";
     }
     else
     {
-      oss << free_mem_in_gigabytes << "G";
+      oss << free_mem_in_gigabytes << "GB";
     }
     break;
     }
@@ -85,8 +84,7 @@ std::string mem_string( const MemoryStatus & mem_status,
     break;
     }
   default: // Default mode, just show the used/total memory in MB
-    oss << convert_unit(mem_status.used_mem, GIGABYTES, MEGABYTES) << '/' 
-        << convert_unit(mem_status.total_mem, GIGABYTES, MEGABYTES) << 'G';
+    oss<<static_cast<unsigned int>(mem_status.used_mem/1024)<<"/"<<static_cast<unsigned int>(mem_status.total_mem/1024)<<"GB";
   }
 
   if( use_colors )
@@ -103,4 +101,3 @@ std::string mem_string( const MemoryStatus & mem_status,
 
   return oss.str();
 }
-
